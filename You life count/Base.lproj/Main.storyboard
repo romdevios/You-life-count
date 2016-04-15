@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6198" systemVersion="14A297b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6198"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -625,15 +626,6 @@
                             </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
-                                    <items>
-                                        <menuItem title="You life count Help" keyEquivalent="?" id="FKE-Sm-Kum">
-                                            <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
                             </menuItem>
                         </items>
                     </menu>
@@ -641,12 +633,110 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <menu id="saL-qm-utN">
+                    <items>
+                        <menuItem title="Preferences" id="AqL-iu-CUX">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <segue destination="B8D-0N-5wS" kind="show" id="Jc2-dA-4r3"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Quit" id="Nj1-Lp-x9q">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="Quit:" target="Voe-Tx-rLC" id="hiq-ML-vRS"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                    <connections>
+                        <binding destination="B8D-0N-5wS" name="font" keyPath="self.Menu" id="lE6-mu-DRP"/>
+                    </connections>
+                </menu>
+                <menu id="Ty3-q0-JIk" userLabel="Counter">
+                    <items>
+                        <menuItem title="Year" id="6TK-Ab-9HU" userLabel="Year">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Week" tag="1" id="dun-zB-9EW" userLabel="Week">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Day" tag="2" id="YhN-5G-cC6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Hour" tag="3" id="EsB-Dn-wz6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Minute" tag="4" id="qm2-lG-OjG">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Secoud" tag="5" id="2RZ-sk-kOk">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="HHz-uu-tCm"/>
+                        <menuItem title="Preferences" id="UdF-gX-coP">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <segue destination="B8D-0N-5wS" kind="show" id="hpS-bw-RSd"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Quit" id="XU0-O1-Rvz">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="Quit:" target="Voe-Tx-rLC" id="MmP-VL-ySh"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                    <connections>
+                        <binding destination="B8D-0N-5wS" name="font" keyPath="self.Menu" id="xxr-00-zzX"/>
+                    </connections>
+                </menu>
+                <menu id="MmG-5m-I8v" userLabel="Percent">
+                    <items>
+                        <menuItem title="Life" id="cXW-yx-6vl">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Year" tag="1" id="jt6-XM-dFL">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Mounth" tag="2" id="XYa-qR-El1">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Week" tag="3" id="Bo8-gW-KRc">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Day" tag="4" id="sQl-Fv-sjH">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Cmc-Qp-1Fx"/>
+                        <menuItem title="Preferences" id="vJb-Zt-HoN">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <segue destination="B8D-0N-5wS" kind="show" id="mA6-Ub-T48"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Quit" id="zZW-7m-pfq">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="Quit:" target="Voe-Tx-rLC" id="Vms-78-dbb"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                    <connections>
+                        <binding destination="B8D-0N-5wS" name="font" keyPath="self.Menu" id="5tJ-M9-VFd"/>
+                    </connections>
+                </menu>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="You_life_count" customModuleProvider="target">
+                    <connections>
+                        <outlet property="CounterMenu" destination="Ty3-q0-JIk" id="Fhf-gG-thJ"/>
+                        <outlet property="Menu" destination="saL-qm-utN" id="ENh-xk-7iC"/>
+                        <outlet property="PercentMenu" destination="MmG-5m-I8v" id="xfr-Hy-Hcr"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="51" y="-48"/>
         </scene>
-        <!--Window Controller - Window-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -662,20 +752,212 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="51" y="223"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="You_life_count" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1e7-So-Ed0">
+                                <rect key="frame" x="53" y="129" width="97" height="18"/>
+                                <buttonCell key="cell" type="radio" title="life percents" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="p9B-Dj-Tig">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="PercentsChange:" target="XfG-lQ-9wD" id="9WZ-Lm-rCq"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Afp-BS-YNg">
+                                <rect key="frame" x="53" y="107" width="105" height="18"/>
+                                <buttonCell key="cell" type="radio" title="year percents" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="W1A-cs-q43">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="PercentsChange:" target="XfG-lQ-9wD" id="3HW-VU-R7e"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="4Ds-mn-Ygd">
+                                <rect key="frame" x="53" y="85" width="125" height="18"/>
+                                <buttonCell key="cell" type="radio" title="mounth percents" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="lxk-9G-x4S">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="PercentsChange:" target="XfG-lQ-9wD" id="xld-ZM-GUZ"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="PNc-hx-bXE">
+                                <rect key="frame" x="53" y="63" width="111" height="18"/>
+                                <buttonCell key="cell" type="radio" title="week percents" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="t9j-E9-6ra">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="PercentsChange:" target="XfG-lQ-9wD" id="0xR-kT-G8P"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="ove-9m-KzT">
+                                <rect key="frame" x="53" y="41" width="101" height="18"/>
+                                <buttonCell key="cell" type="radio" title="day percents" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="DKg-1S-afo">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="PercentsChange:" target="XfG-lQ-9wD" id="lKi-rR-seL"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dpx-nx-UWC">
+                                <rect key="frame" x="52" y="181" width="97" height="18"/>
+                                <buttonCell key="cell" type="check" title="Add percent" bezelStyle="regularSquare" imagePosition="left" inset="2" id="uiN-uj-43b">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="AddWidget:" target="XfG-lQ-9wD" id="q2q-g0-FH4"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ldu-Kb-3iX">
+                                <rect key="frame" x="282" y="129" width="99" height="18"/>
+                                <buttonCell key="cell" type="radio" title="year counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="uAA-78-lb3">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CounterChenged:" target="XfG-lQ-9wD" id="NlA-ix-TAV"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="XQx-cL-QYh">
+                                <rect key="frame" x="282" y="107" width="104" height="18"/>
+                                <buttonCell key="cell" type="radio" title="week counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="hO9-pq-LXp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CounterChenged:" target="XfG-lQ-9wD" id="TUW-Hq-mwe"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="tDC-LF-BUa">
+                                <rect key="frame" x="282" y="85" width="94" height="18"/>
+                                <buttonCell key="cell" type="radio" title="day counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="9a9-wm-iEI">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CounterChenged:" target="XfG-lQ-9wD" id="456-mp-K5j"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="91I-2Q-KYO">
+                                <rect key="frame" x="282" y="63" width="100" height="18"/>
+                                <buttonCell key="cell" type="radio" title="hour counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="vas-VA-Jk5">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CounterChenged:" target="XfG-lQ-9wD" id="X08-kQ-Srv"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="2b7-F7-OmB">
+                                <rect key="frame" x="282" y="41" width="114" height="18"/>
+                                <buttonCell key="cell" type="radio" title="minute counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0PC-Ox-hU7">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CounterChenged:" target="XfG-lQ-9wD" id="6T0-gy-RG5"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="o8q-tP-ndI">
+                                <rect key="frame" x="282" y="19" width="117" height="18"/>
+                                <buttonCell key="cell" type="radio" title="second counter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="mkM-2l-18r">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="CounterChenged:" target="XfG-lQ-9wD" id="kgb-NB-fBy"/>
+                                </connections>
+                            </button>
+                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJ5-LM-ASa">
+                                <rect key="frame" x="281" y="152" width="118" height="24"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="tzd-QZ-Jdg">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="integer" width="56" selected="YES"/>
+                                        <segment label="decimal" width="55" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="TypeOfCounterChanged:" target="XfG-lQ-9wD" id="yMz-wK-jbI"/>
+                                </connections>
+                            </segmentedControl>
+                            <button fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="tLL-mK-pTq">
+                                <rect key="frame" x="281" y="181" width="97" height="18"/>
+                                <buttonCell key="cell" type="check" title="Add counter" bezelStyle="regularSquare" imagePosition="left" inset="2" id="x32-BL-5OA">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="AddWidget:" target="XfG-lQ-9wD" id="rej-5L-9NT"/>
+                                </connections>
+                            </button>
+                            <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mpZ-ar-hc0">
+                                <rect key="frame" x="166" y="227" width="97" height="27"/>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="Ufj-sh-aBi">
+                                    <font key="font" metaFont="system"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="0.0">
+                                        <!--2001-01-01 00:00:00 +0000-->
+                                    </date>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                </datePickerCell>
+                                <connections>
+                                    <action selector="NewBirthDay:" target="XfG-lQ-9wD" id="wWR-wE-lVf"/>
+                                </connections>
+                            </datePicker>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJJ-GT-mkf">
+                                <rect key="frame" x="75" y="230" width="83" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You bith day:" id="6Yx-z2-qw9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Id-qb-nKQ">
+                                <rect key="frame" x="174" y="149" width="77" height="48"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="arf-GH-Zth"/>
+                            </imageView>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="BirthDay" destination="mpZ-ar-hc0" id="cmH-r6-iiw"/>
+                        <outlet property="CounterEnable" destination="tLL-mK-pTq" id="n2z-Pg-oJa"/>
+                        <outlet property="DayCounter" destination="tDC-LF-BUa" id="OsA-ub-665"/>
+                        <outlet property="DayPercents" destination="ove-9m-KzT" id="T2p-zi-hm5"/>
+                        <outlet property="HourCounter" destination="91I-2Q-KYO" id="Vxr-IR-A62"/>
+                        <outlet property="LifePercents" destination="1e7-So-Ed0" id="TBD-Fj-TUe"/>
+                        <outlet property="MinuteCounter" destination="2b7-F7-OmB" id="NRC-Ew-0HE"/>
+                        <outlet property="MounthPercents" destination="4Ds-mn-Ygd" id="kl6-df-f6V"/>
+                        <outlet property="PercentEnable" destination="Dpx-nx-UWC" id="gRV-kv-ypN"/>
+                        <outlet property="SecondCounter" destination="o8q-tP-ndI" id="tzV-XZ-YYQ"/>
+                        <outlet property="TypeOfCounter" destination="qJ5-LM-ASa" id="rgm-9R-aof"/>
+                        <outlet property="WeekCounter" destination="XQx-cL-QYh" id="i87-W3-HPw"/>
+                        <outlet property="WeekPercents" destination="PNc-hx-bXE" id="RiR-nL-uRy"/>
+                        <outlet property="YearCounter" destination="Ldu-Kb-3iX" id="sUn-Jc-PoD"/>
+                        <outlet property="YearPercents" destination="Afp-BS-YNg" id="3sp-Ui-31b"/>
+                        <outlet property="img" destination="8Id-qb-nKQ" id="dsi-SJ-VIY"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="51" y="620"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="mA6-Ub-T48"/>
+    </inferredMetricsTieBreakers>
 </document>

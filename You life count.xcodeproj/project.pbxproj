@@ -13,6 +13,9 @@
 		30B848011CBE597800D145BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30B847FF1CBE597800D145BC /* Main.storyboard */; };
 		30B8480C1CBE597800D145BC /* You_life_countTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B8480B1CBE597800D145BC /* You_life_countTests.swift */; };
 		30B848171CBE597800D145BC /* You_life_countUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B848161CBE597800D145BC /* You_life_countUITests.swift */; };
+		30B8482B1CBEA00700D145BC /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B8482A1CBEA00700D145BC /* DateManager.swift */; };
+		30B848311CBEEA6D00D145BC /* SettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B848301CBEEA6D00D145BC /* SettingsDelegate.swift */; };
+		30B8485F1CC12F3400D145BC /* status.eps in Resources */ = {isa = PBXBuildFile; fileRef = 30B8485E1CC12F3400D145BC /* status.eps */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		30B848121CBE597800D145BC /* You life countUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "You life countUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B848161CBE597800D145BC /* You_life_countUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = You_life_countUITests.swift; sourceTree = "<group>"; };
 		30B848181CBE597800D145BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30B8482A1CBEA00700D145BC /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		30B848301CBEEA6D00D145BC /* SettingsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDelegate.swift; sourceTree = "<group>"; };
+		30B8485E1CC12F3400D145BC /* status.eps */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = status.eps; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +101,11 @@
 		30B847F81CBE597800D145BC /* You life count */ = {
 			isa = PBXGroup;
 			children = (
+				30B8485E1CC12F3400D145BC /* status.eps */,
 				30B847F91CBE597800D145BC /* AppDelegate.swift */,
 				30B847FB1CBE597800D145BC /* ViewController.swift */,
+				30B8482A1CBEA00700D145BC /* DateManager.swift */,
+				30B848301CBEEA6D00D145BC /* SettingsDelegate.swift */,
 				30B847FD1CBE597800D145BC /* Assets.xcassets */,
 				30B847FF1CBE597800D145BC /* Main.storyboard */,
 				30B848021CBE597800D145BC /* Info.plist */,
@@ -226,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30B8485F1CC12F3400D145BC /* status.eps in Resources */,
 				30B847FE1CBE597800D145BC /* Assets.xcassets in Resources */,
 				30B848011CBE597800D145BC /* Main.storyboard in Resources */,
 			);
@@ -253,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				30B847FC1CBE597800D145BC /* ViewController.swift in Sources */,
+				30B848311CBEEA6D00D145BC /* SettingsDelegate.swift in Sources */,
+				30B8482B1CBEA00700D145BC /* DateManager.swift in Sources */,
 				30B847FA1CBE597800D145BC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,11 +398,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "You life count/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.filippov.You-life-count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "You life count/You life count-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -398,11 +413,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "You life count/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.filippov.You-life-count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "You life count/You life count-Bridging-Header.h";
 			};
 			name = Release;
 		};
