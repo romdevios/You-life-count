@@ -13,7 +13,7 @@ class DateManager {
     static let sharedManager = DateManager()
     private init() {}
     
-    var youLifeCount: Double? {
+    var youLifeCount: NSTimeInterval? {
         guard let birthDay = SettingsDelegate.sharedManager.youBirthDay else {
             return nil
         }

@@ -624,8 +624,17 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Help" id="wpr-3q-Mcd">
+                            <menuItem title="Help" id="iHh-lV-cUh">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Help" systemMenu="help" id="AKT-gn-Hgq">
+                                    <items>
+                                        <menuItem title="Application Help" keyEquivalent="?" id="evu-M8-PHA">
+                                            <connections>
+                                                <action selector="showHelp:" target="Ady-hI-5gd" id="vG4-4q-jE5"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                         </items>
                     </menu>
@@ -656,21 +665,59 @@
                     <items>
                         <menuItem title="Year" id="6TK-Ab-9HU" userLabel="Year">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedCounter:" target="Voe-Tx-rLC" id="IaX-kP-Mpc"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Week" tag="1" id="dun-zB-9EW" userLabel="Week">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedCounter:" target="Voe-Tx-rLC" id="ltr-5C-7Qz"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Day" tag="2" id="YhN-5G-cC6">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedCounter:" target="Voe-Tx-rLC" id="vHg-uH-S9T"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Hour" tag="3" id="EsB-Dn-wz6">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedCounter:" target="Voe-Tx-rLC" id="svG-Yc-SE1"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Minute" tag="4" id="qm2-lG-OjG">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedCounter:" target="Voe-Tx-rLC" id="1Wk-sD-NLt"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Secoud" tag="5" id="2RZ-sk-kOk">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedCounter:" target="Voe-Tx-rLC" id="8QQ-wq-Gzb"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Fso-28-6hc"/>
+                        <menuItem title="Type" tag="6" id="3TA-8i-02N">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Type" id="7KH-4l-pQd">
+                                <items>
+                                    <menuItem title="Integer" id="NhX-bB-quO">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="SelectedCounterType:" target="Voe-Tx-rLC" id="STv-Od-wIJ"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Decimal" tag="1" id="MeK-BS-eZ0">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="SelectedCounterType:" target="Voe-Tx-rLC" id="j6F-RR-EX5"/>
+                                        </connections>
+                                    </menuItem>
+                                </items>
+                            </menu>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="HHz-uu-tCm"/>
                         <menuItem title="Preferences" id="UdF-gX-coP">
@@ -694,18 +741,33 @@
                     <items>
                         <menuItem title="Life" id="cXW-yx-6vl">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedPercent:" target="Voe-Tx-rLC" id="RuR-sw-g8X"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Year" tag="1" id="jt6-XM-dFL">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedPercent:" target="Voe-Tx-rLC" id="ucP-NZ-hRO"/>
+                            </connections>
                         </menuItem>
-                        <menuItem title="Mounth" tag="2" id="XYa-qR-El1">
+                        <menuItem title="Month" tag="2" id="XYa-qR-El1">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedPercent:" target="Voe-Tx-rLC" id="FcN-yH-ifX"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Week" tag="3" id="Bo8-gW-KRc">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedPercent:" target="Voe-Tx-rLC" id="q1Z-cD-KsX"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Day" tag="4" id="sQl-Fv-sjH">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="SelectedPercent:" target="Voe-Tx-rLC" id="mgI-OK-Wvf"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Cmc-Qp-1Fx"/>
                         <menuItem title="Preferences" id="vJb-Zt-HoN">
@@ -733,6 +795,7 @@
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="8n0-8a-dDw" customClass="NSFontManager"/>
             </objects>
             <point key="canvasLocation" x="51" y="-48"/>
         </scene>
@@ -906,31 +969,28 @@
                                 </connections>
                             </button>
                             <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mpZ-ar-hc0">
-                                <rect key="frame" x="166" y="227" width="97" height="27"/>
+                                <rect key="frame" x="166" y="227" width="158" height="27"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="Ufj-sh-aBi">
                                     <font key="font" metaFont="system"/>
-                                    <date key="date" timeIntervalSinceReferenceDate="0.0">
-                                        <!--2001-01-01 00:00:00 +0000-->
+                                    <date key="date" timeIntervalSinceReferenceDate="-31536000">
+                                        <!--2000-01-02 00:00:00 +0000-->
                                     </date>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES" second="YES"/>
                                 </datePickerCell>
                                 <connections>
                                     <action selector="NewBirthDay:" target="XfG-lQ-9wD" id="wWR-wE-lVf"/>
                                 </connections>
                             </datePicker>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qJJ-GT-mkf">
-                                <rect key="frame" x="75" y="230" width="83" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You bith day:" id="6Yx-z2-qw9">
+                                <rect key="frame" x="72" y="230" width="88" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You birth day:" id="6Yx-z2-qw9">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Id-qb-nKQ">
-                                <rect key="frame" x="174" y="149" width="77" height="48"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="arf-GH-Zth"/>
-                            </imageView>
                         </subviews>
                     </view>
                     <connections>
@@ -949,7 +1009,6 @@
                         <outlet property="WeekPercents" destination="PNc-hx-bXE" id="RiR-nL-uRy"/>
                         <outlet property="YearCounter" destination="Ldu-Kb-3iX" id="sUn-Jc-PoD"/>
                         <outlet property="YearPercents" destination="Afp-BS-YNg" id="3sp-Ui-31b"/>
-                        <outlet property="img" destination="8Id-qb-nKQ" id="dsi-SJ-VIY"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

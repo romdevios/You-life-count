@@ -129,7 +129,7 @@ protocol ChangeValues {
 enum PercentType: Int {
     case Life
     case Year
-    case Mounth
+    case Month
     case Week
     case Day
 }

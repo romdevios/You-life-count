@@ -54,16 +54,6 @@ class ViewController: NSViewController, ChangeValues {
         
     }
     
-    @IBOutlet weak var img: NSImageView!
-    var n: CGFloat = 0
-    func changeImage() {
-        n += 0.15
-        n -= n > 1 ? n : 0
-        print(n)
-        img.image = AppDelegate.giveStatusImageForDone(n)
-    }
-    
-    
     deinit {
         SettingsDelegate.sharedManager.removeDelegateWithIndex(indexDelegate ?? 0)
     }
@@ -102,8 +92,6 @@ class ViewController: NSViewController, ChangeValues {
     
     func percentEnableChange(percentIsEnable: Bool) {
         PercentEnable.state = percentIsEnable ? NSOnState : NSOffState
-        
-        changeImage()
     }
     func counterEnableChange(counterIsEnable: Bool) {
         CounterEnable.state = counterIsEnable ? NSOnState : NSOffState

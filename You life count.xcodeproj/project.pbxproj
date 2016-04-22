@@ -492,6 +492,7 @@
 				30B8481D1CBE597800D145BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		30B8481E1CBE597800D145BC /* Build configuration list for PBXNativeTarget "You life countTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +501,7 @@
 				30B848201CBE597800D145BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		30B848211CBE597800D145BC /* Build configuration list for PBXNativeTarget "You life countUITests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +510,7 @@
 				30B848231CBE597800D145BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
