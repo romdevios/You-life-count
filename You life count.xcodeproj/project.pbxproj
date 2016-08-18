@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3087824E1D5E677F003C9D5B /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3087824D1D5E677F003C9D5B /* StatusView.swift */; };
 		30B847FA1CBE597800D145BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B847F91CBE597800D145BC /* AppDelegate.swift */; };
 		30B847FC1CBE597800D145BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B847FB1CBE597800D145BC /* ViewController.swift */; };
 		30B847FE1CBE597800D145BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30B847FD1CBE597800D145BC /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3087824D1D5E677F003C9D5B /* StatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		30B847F61CBE597800D145BC /* You life count.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "You life count.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B847F91CBE597800D145BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30B847FB1CBE597800D145BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				30B847FB1CBE597800D145BC /* ViewController.swift */,
 				30B8482A1CBEA00700D145BC /* DateManager.swift */,
 				30B848301CBEEA6D00D145BC /* SettingsDelegate.swift */,
+				3087824D1D5E677F003C9D5B /* StatusView.swift */,
 				30B847FD1CBE597800D145BC /* Assets.xcassets */,
 				30B847FF1CBE597800D145BC /* Main.storyboard */,
 				30B848021CBE597800D145BC /* Info.plist */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3087824E1D5E677F003C9D5B /* StatusView.swift in Sources */,
 				30B847FC1CBE597800D145BC /* ViewController.swift in Sources */,
 				30B848311CBEEA6D00D145BC /* SettingsDelegate.swift in Sources */,
 				30B8482B1CBEA00700D145BC /* DateManager.swift in Sources */,

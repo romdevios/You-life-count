@@ -56,11 +56,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         statusBarItem.highlightMode = true
 //        statusBarItem.image = giveStatusImageForDone(0)
         
+//        statusBarItem.view?.addSubview(StatusView(frame: statusBarItem.view!.bounds))
 //        addCounter()
 //        addPercent()
     }
     
-    @IBAction func Quit(sender: AnyObject) {
+    @IBAction func Quit(sender: AnyObject?) {
         NSApp.terminate(nil)
     }
     
@@ -75,15 +76,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         percentTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(updatePercentTitle), userInfo: nil, repeats: true)
     }
     
-    var n = 0
     func updatePercentTitle() {
         if let img = giveStatusImageForDone(givePercentDone()) {
             statusBarPercent?.image = img
-        } else if n < 20 {
-            n += 1
-            print("try №" + String(n))
         } else {
-            fatalError("image not found")
+            Quit(nil)
+            relauchProgram()
         }
     }
     private func addCounter() {
@@ -195,6 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         var fireDate = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let destinitionDate = DateManager.sharedManager.getDestinitionTime()
+        
         switch SettingsDelegate.sharedManager.counterType {
         case .Year:
             let comp = calendar.components(.Year, fromDate: destinitionDate)
@@ -241,7 +240,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             interval = 0.2
         }
         fireDate = fireDate.dateByAddingTimeInterval(NSDate().timeIntervalSinceDate(destinitionDate))
-        print(fireDate, "\n", NSDate(), "\n", NSDate().timeIntervalSinceDate(destinitionDate))
         
         
         NSTimer.scheduledTimerWithTimeInterval(fireDate.timeIntervalSinceDate(destinitionDate), target: self, selector: #selector(setTimer), userInfo: nil, repeats: false)
@@ -257,36 +255,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
     }
     
     
-    var firstPath: String!
+    var pictureData: String? = nil
     func giveStatusImageForDone(done: CGFloat) -> NSImage? {
         let width = String(48 * done - 48 * done % 0.01)
         
-        let file = "status.eps"
-        
-        var path = NSBundle.mainBundle().pathForResource(file, ofType: nil) ?? file
-        let startPath = path.startIndex
-        let endPath = startPath.advancedBy(path.characters.count - file.characters.count)
-        path = path.substringWithRange(startPath..<endPath)
-        
-        do {
+        if pictureData == nil {
             
-            //reading
-            var data = String()
-            data = try NSString(contentsOfFile: path + file, encoding: NSUTF8StringEncoding) as String
-        
-            let start = data.startIndex.advancedBy(2241)
-            let endOld = start.advancedBy(100)
-            let oldLength = data.substringWithRange(start..<endOld).componentsSeparatedByString(" ")[0].characters.count
-            let end   = start.advancedBy(oldLength)
-            data = data.stringByReplacingCharactersInRange(start..<end, withString: width)
+            let file = "status.eps"
+            let path = NSBundle.mainBundle().pathForResource(file, ofType: nil) ?? file
             
-            //writing
-            try data.writeToFile(path + file, atomically: false, encoding: NSUTF8StringEncoding)
-
+            do {
+                pictureData = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+            }
+            catch {fatalError("Can't write in file")}
         }
-        catch {fatalError("Can't write in file")}
         
-        return NSImage(contentsOfFile: path + file)
+        guard var data = pictureData else {
+            return nil
+        }
+        
+        let start = data.startIndex.advancedBy(2241)
+        let endOld = start.advancedBy(100)
+        let oldLength = data.substringWithRange(start..<endOld).componentsSeparatedByString(" ")[0].characters.count
+        let end   = start.advancedBy(oldLength)
+        data = data.stringByReplacingCharactersInRange(start..<end, withString: width)
+        
+        return NSImage(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
     }
     
     func givePercentDone() -> CGFloat {
@@ -328,15 +322,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             
             done = destinitionDate.timeIntervalSinceDate(firstDayOfWeekDate!) / secondInDestenitionWeek!
         case .Day:
-            let comp = calendar.components([.Year, .Month, .Day], fromDate: destinitionDate)
-            let firstSecondOfDayDate = calendar.dateFromComponents(comp)
+            let firstSecondOfDayDate = NSCalendar.currentCalendar().startOfDayForDate(destinitionDate)
             
-            comp.day += 1
-            let lastSecondOfDayDate = calendar.dateFromComponents(comp)
+            let secondInDay: Double = 86_400 //one day
             
-            let secondInDestenitionDay = lastSecondOfDayDate?.timeIntervalSinceDate(firstSecondOfDayDate!)
-            
-            done = destinitionDate.timeIntervalSinceDate(firstSecondOfDayDate!) / secondInDestenitionDay!
+            done = (destinitionDate.timeIntervalSinceDate(firstSecondOfDayDate) - Double(NSTimeZone.systemTimeZone().secondsFromGMT)) / secondInDay
+            print(done)
         }
         return CGFloat(done)
     }
@@ -372,6 +363,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         }
         
         return str
+    }
+    
+    func relauchProgram() {
+        let task = NSTask()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", "open \"\(NSBundle.mainBundle().bundlePath)\""]
+        task.launch()
+        NSApplication.sharedApplication().terminate(nil)
     }
     
 }
