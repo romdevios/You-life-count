@@ -24,10 +24,10 @@ class DateManager {
         let sourceDate = Date()
         
         let sourceTimeZone = TimeZone(abbreviation: "GMT")
-        let destinationTimeZone = TimeZone.systemTimeZone
+        let destinationTimeZone = TimeZone.current
         
         let sourceGMTOffset = sourceTimeZone!.secondsFromGMT(for: sourceDate)
-        let destinationGMTOffset = destinationTimeZone().secondsFromGMT(for: sourceDate)
+        let destinationGMTOffset = destinationTimeZone.secondsFromGMT(for: sourceDate)
         let interval = Double(destinationGMTOffset - sourceGMTOffset)
         
         return Date(timeInterval: interval, since:sourceDate)

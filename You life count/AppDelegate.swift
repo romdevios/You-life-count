@@ -197,44 +197,44 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         switch SettingsDelegate.sharedManager.counterType {
         case .year:
             var comp = (calendar as NSCalendar).components(.year, from: destinitionDate as Date)
-            comp.year += 1
+            comp.year? += 1
             fireDate = calendar.date(from: comp)!
             
             interval = 86_400 //one day
             
         case .week:
-            var firstDayOfWeekDate: Date?
+            var firstDayOfWeekDate: NSDate?
             (calendar as NSCalendar).range(of: .weekOfYear, start: &firstDayOfWeekDate, interval: nil, for: destinitionDate)
-            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: firstDayOfWeekDate!)
-            comp.day += 7
+            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: firstDayOfWeekDate! as Date)
+            comp.day? += 7
             fireDate = calendar.date(from: comp)!
             
             interval = 86_400 //one day
             
         case .day:
             var comp = (calendar as NSCalendar).components([.year, .month, .day], from: destinitionDate as Date)
-            comp.day += 1
+            comp.day? += 1
             fireDate = calendar.date(from: comp)!
             
             interval = 86_400 //one day
             
         case .hour:
             var comp = (calendar as NSCalendar).components([.year, .month, .day, .hour], from: destinitionDate as Date)
-            comp.hour += 1
+            comp.hour? += 1
             fireDate = calendar.date(from: comp)!
             
             interval = 3_600 //one hour
             
         case .minute:
             var comp = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute], from: destinitionDate as Date)
-            comp.minute += 1
+            comp.minute? += 1
             fireDate = calendar.date(from: comp)!
             
             interval = 60 //one minute
             
         case .second:
             var comp = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute, .second], from: destinitionDate as Date)
-            comp.second += 1
+            comp.second? += 1
             fireDate = calendar.date(from: comp)!
             
             interval = 0.2
@@ -275,9 +275,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         }
         
         let start = data.characters.index(data.startIndex, offsetBy: 2241)
-        let endOld = <#T##String.CharacterView corresponding to `start`##String.CharacterView#>.index(start, offsetBy: 100)
+        let endOld = data.index(start, offsetBy: 100)
         let oldLength = data.substring(with: start..<endOld).components(separatedBy: " ")[0].characters.count
-        let end   = <#T##String.CharacterView corresponding to `start`##String.CharacterView#>.index(start, offsetBy: oldLength)
+        let end   = data.index(start, offsetBy: oldLength)
         data = data.replacingCharacters(in: start..<end, with: width)
         
         return NSImage(data: data.data(using: String.Encoding.utf8)!)
@@ -297,7 +297,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             let firstDayOfYearDate = calendar.date(from: comp)
             
             comp = (calendar as NSCalendar).components(.year, from: destinitionDate as Date)
-            comp.year += 1
+            comp.year? += 1
             let lastDayOfYearDate = calendar.date(from: comp)
             
             let secondInDestenitionYear = lastDayOfYearDate?.timeIntervalSince(firstDayOfYearDate!)
@@ -311,23 +311,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             
             done = destinitionDate.timeIntervalSince(firstDayOfMonthDate!) / Double(dayInDestenitionMonth.length * 86_400)
         case .week:
-            var firstDayOfWeekDate: Date?
+            var firstDayOfWeekDate: NSDate?
             (calendar as NSCalendar).range(of: .weekOfYear, start: &firstDayOfWeekDate, interval: nil, for: destinitionDate)
             
-            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: firstDayOfWeekDate!)
-            comp.day += 7
+            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: firstDayOfWeekDate! as Date)
+            comp.day? += 7
             let lastDayOfWeekDate = calendar.date(from: comp)
             
-            let secondInDestenitionWeek = lastDayOfWeekDate?.timeIntervalSince(firstDayOfWeekDate!)
+            let secondInDestenitionWeek = lastDayOfWeekDate?.timeIntervalSince(firstDayOfWeekDate! as Date)
             
-            done = destinitionDate.timeIntervalSince(firstDayOfWeekDate!) / secondInDestenitionWeek!
+            done = destinitionDate.timeIntervalSince(firstDayOfWeekDate! as Date) / secondInDestenitionWeek!
         case .day:
-            let firstSecondOfDayDate = Calendar.current.startOfDay(for: destinitionDate as Date)
+            let firstSecondOfDayDate = Calendar.current.startOfDay(for: destinitionDate)
             
             let secondInDay: Double = 86_400 //one day
             
             done = (destinitionDate.timeIntervalSince(firstSecondOfDayDate) - Double(NSTimeZone.system.secondsFromGMT())) / secondInDay
-            print(done)
         }
         return CGFloat(done)
     }

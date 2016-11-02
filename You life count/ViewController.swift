@@ -51,6 +51,7 @@ class ViewController: NSViewController, ChangeValues {
         counterIntegerChange(settings.counterIsInteger)
         birthDayChage(settings.youBirthDay as Date? ?? Date())
         
+        print(NSImage.imageTypes())
         
     }
     
@@ -58,7 +59,7 @@ class ViewController: NSViewController, ChangeValues {
         SettingsDelegate.sharedManager.removeDelegateWithIndex(indexDelegate ?? 0)
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
