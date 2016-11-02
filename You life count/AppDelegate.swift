@@ -21,10 +21,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
     var statusBarCounter : NSStatusItem?
     var delegateIndex: Int?
     
-    var percentTimer: NSTimer?
-    var counterTimer: NSTimer?
+    var percentTimer: Timer?
+    var counterTimer: Timer?
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
         let settings = SettingsDelegate.sharedManager
@@ -36,20 +36,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         percentTypeChange(settings.percentType)
         counterTypeChange(settings.counterType)
         counterIntegerChange(settings.counterIsInteger)
-        birthDayChage(settings.youBirthDay ?? NSDate())
+        birthDayChage(settings.youBirthDay as Date? ?? Date())
         
         
-        NSApp.setActivationPolicy(.Regular) //show in dock
+        NSApp.setActivationPolicy(.regular) //show in dock
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
 
     override func awakeFromNib() {
         
-        statusBarItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+        statusBarItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         statusBarItem.menu = Menu
 //        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(newTitle), userInfo: nil, repeats: true)
 //        statusBarItem.title = "Yoo"
@@ -61,19 +61,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
 //        addPercent()
     }
     
-    @IBAction func Quit(sender: AnyObject?) {
+    @IBAction func Quit(_ sender: AnyObject?) {
         NSApp.terminate(nil)
     }
     
     
-    private func addPercent() {
-        statusBarPercent = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+    fileprivate func addPercent() {
+        statusBarPercent = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         statusBarPercent?.menu = PercentMenu
 //        statusBarPercent?.title = "Percent"
         statusBarPercent?.highlightMode = true
         statusBarPercent?.toolTip = "Percent"
         
-        percentTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(updatePercentTitle), userInfo: nil, repeats: true)
+        percentTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updatePercentTitle), userInfo: nil, repeats: true)
     }
     
     func updatePercentTitle() {
@@ -84,8 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             relauchProgram()
         }
     }
-    private func addCounter() {
-        statusBarCounter = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+    fileprivate func addCounter() {
+        statusBarCounter = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         statusBarCounter?.menu = CounterMenu
 //        statusBarCounter?.title = "Counter"
 //        let paragraphStyle = NSMutableParagraphStyle()
@@ -95,7 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         
         
         let font = NSFont(name: "Helvetica Neue Bold", size: 15.0)
-        attrsDictionary = [NSFontAttributeName: font as! AnyObject]
+        attrsDictionary = [NSFontAttributeName: font as AnyObject]
         
         statusBarCounter?.highlightMode = true
         statusBarCounter?.toolTip = "Counter"
@@ -112,19 +112,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
 //        statusBarCounter?.title = newText
     }
     
-    @IBAction func SelectedCounter(sender: NSMenuItem) {
+    @IBAction func SelectedCounter(_ sender: NSMenuItem) {
         SettingsDelegate.sharedManager.setCounterTypeWithTag(sender.tag)
     }
-    @IBAction func SelectedPercent(sender: NSMenuItem) {
+    @IBAction func SelectedPercent(_ sender: NSMenuItem) {
         SettingsDelegate.sharedManager.setPercentTypeWithTag(sender.tag)
     }
-    @IBAction func SelectedCounterType(sender: NSMenuItem) {
+    @IBAction func SelectedCounterType(_ sender: NSMenuItem) {
         SettingsDelegate.sharedManager.counterIsInteger = sender.tag == 0
     }
     
     
     
-    func percentEnableChange(percentIsEnable: Bool) {
+    func percentEnableChange(_ percentIsEnable: Bool) {
         if percentIsEnable {
             addPercent()
         } else {
@@ -133,7 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             statusBarPercent = nil
         }
     }
-    func counterEnableChange(counterIsEnable: Bool) {
+    func counterEnableChange(_ counterIsEnable: Bool) {
         if counterIsEnable {
             addCounter()
         } else {
@@ -142,28 +142,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             statusBarCounter = nil
         }
     }
-    func percentTypeChange(percentType: PercentType) {
-        for item in PercentMenu.itemArray {
+    func percentTypeChange(_ percentType: PercentType) {
+        for item in PercentMenu.items {
             item.state = NSOffState
         }
-        PercentMenu.itemArray[percentType.rawValue].state = NSOnState
+        PercentMenu.items[percentType.rawValue].state = NSOnState
         
         updateStatusItem()
     }
-    func counterTypeChange(counterType: CounterType) {
-        for item in CounterMenu.itemArray {
+    func counterTypeChange(_ counterType: CounterType) {
+        for item in CounterMenu.items {
             item.state = NSOffState
         }
-        CounterMenu.itemArray[counterType.rawValue].state = NSOnState
+        CounterMenu.items[counterType.rawValue].state = NSOnState
         
         updateStatusItem()
     }
-    func counterIntegerChange(counterIsInteger: Bool) {
-        for item in CounterMenu.itemArray {
+    func counterIntegerChange(_ counterIsInteger: Bool) {
+        for item in CounterMenu.items {
             if item.title != "Type" {
                 continue
             }
-            for types in (item.submenu!.itemArray) {
+            for types in (item.submenu!.items) {
                 types.state = counterIsInteger == (types.tag == 0) ? NSOnState : NSOffState
             }
         }
@@ -171,7 +171,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         updateCounterTimer()
         updateStatusItem()
     }
-    func birthDayChage(birthDay: NSDate) {
+    func birthDayChage(_ birthDay: Date) {
         updateStatusItem()
     }
     
@@ -186,68 +186,68 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
     func updateCounterTimer() {
         counterTimer?.invalidate()
         if !SettingsDelegate.sharedManager.counterIsInteger {
-            counterTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateCounterTitle), userInfo: nil, repeats: true)
+            counterTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateCounterTitle), userInfo: nil, repeats: true)
             return
         }
         
-        var fireDate = NSDate()
-        let calendar = NSCalendar.currentCalendar()
+        var fireDate = Date()
+        let calendar = Calendar.current
         let destinitionDate = DateManager.sharedManager.getDestinitionTime()
         
         switch SettingsDelegate.sharedManager.counterType {
-        case .Year:
-            let comp = calendar.components(.Year, fromDate: destinitionDate)
+        case .year:
+            var comp = (calendar as NSCalendar).components(.year, from: destinitionDate as Date)
             comp.year += 1
-            fireDate = calendar.dateFromComponents(comp)!
+            fireDate = calendar.date(from: comp)!
             
             interval = 86_400 //one day
             
-        case .Week:
-            var firstDayOfWeekDate: NSDate?
-            calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeekDate, interval: nil, forDate: destinitionDate)
-            let comp = calendar.components([.Year, .Month, .Day], fromDate: firstDayOfWeekDate!)
+        case .week:
+            var firstDayOfWeekDate: Date?
+            (calendar as NSCalendar).range(of: .weekOfYear, start: &firstDayOfWeekDate, interval: nil, for: destinitionDate)
+            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: firstDayOfWeekDate!)
             comp.day += 7
-            fireDate = calendar.dateFromComponents(comp)!
+            fireDate = calendar.date(from: comp)!
             
             interval = 86_400 //one day
             
-        case .Day:
-            let comp = calendar.components([.Year, .Month, .Day], fromDate: destinitionDate)
+        case .day:
+            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: destinitionDate as Date)
             comp.day += 1
-            fireDate = calendar.dateFromComponents(comp)!
+            fireDate = calendar.date(from: comp)!
             
             interval = 86_400 //one day
             
-        case .Hour:
-            let comp = calendar.components([.Year, .Month, .Day, .Hour], fromDate: destinitionDate)
+        case .hour:
+            var comp = (calendar as NSCalendar).components([.year, .month, .day, .hour], from: destinitionDate as Date)
             comp.hour += 1
-            fireDate = calendar.dateFromComponents(comp)!
+            fireDate = calendar.date(from: comp)!
             
             interval = 3_600 //one hour
             
-        case .Minute:
-            let comp = calendar.components([.Year, .Month, .Day, .Hour, .Minute], fromDate: destinitionDate)
+        case .minute:
+            var comp = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute], from: destinitionDate as Date)
             comp.minute += 1
-            fireDate = calendar.dateFromComponents(comp)!
+            fireDate = calendar.date(from: comp)!
             
             interval = 60 //one minute
             
-        case .Second:
-            let comp = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate: destinitionDate)
+        case .second:
+            var comp = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute, .second], from: destinitionDate as Date)
             comp.second += 1
-            fireDate = calendar.dateFromComponents(comp)!
+            fireDate = calendar.date(from: comp)!
             
             interval = 0.2
         }
-        fireDate = fireDate.dateByAddingTimeInterval(NSDate().timeIntervalSinceDate(destinitionDate))
+        fireDate = fireDate.addingTimeInterval(Date().timeIntervalSince(destinitionDate as Date))
         
         
-        NSTimer.scheduledTimerWithTimeInterval(fireDate.timeIntervalSinceDate(destinitionDate), target: self, selector: #selector(setTimer), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: fireDate.timeIntervalSince(destinitionDate as Date), target: self, selector: #selector(setTimer), userInfo: nil, repeats: false)
     }
-    var interval: NSTimeInterval = 1
+    var interval: TimeInterval = 1
     func setTimer() {
         counterTimer?.invalidate()
-        counterTimer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: #selector(updateCounterTitle), userInfo: nil, repeats: true)
+        counterTimer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(updateCounterTitle), userInfo: nil, repeats: true)
     }
     
     deinit {
@@ -256,77 +256,77 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
     
     
     var pictureData: String? = nil
-    func giveStatusImageForDone(done: CGFloat) -> NSImage? {
-        let width = String(48 * done - 48 * done % 0.01)
+    func giveStatusImageForDone(_ done: CGFloat) -> NSImage? {
+        let width = String(describing: 48 * done - (48 * done).truncatingRemainder(dividingBy: 0.01))
         
         if pictureData == nil {
             
             let file = "status.eps"
-            let path = NSBundle.mainBundle().pathForResource(file, ofType: nil) ?? file
+            let path = Bundle.main.path(forResource: file, ofType: nil) ?? file
             
             do {
-                pictureData = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+                pictureData = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
             }
-            catch {fatalError("Can't write in file")}
+            catch {fatalError("Can't read from file")}
         }
         
         guard var data = pictureData else {
             return nil
         }
         
-        let start = data.startIndex.advancedBy(2241)
-        let endOld = start.advancedBy(100)
-        let oldLength = data.substringWithRange(start..<endOld).componentsSeparatedByString(" ")[0].characters.count
-        let end   = start.advancedBy(oldLength)
-        data = data.stringByReplacingCharactersInRange(start..<end, withString: width)
+        let start = data.characters.index(data.startIndex, offsetBy: 2241)
+        let endOld = <#T##String.CharacterView corresponding to `start`##String.CharacterView#>.index(start, offsetBy: 100)
+        let oldLength = data.substring(with: start..<endOld).components(separatedBy: " ")[0].characters.count
+        let end   = <#T##String.CharacterView corresponding to `start`##String.CharacterView#>.index(start, offsetBy: oldLength)
+        data = data.replacingCharacters(in: start..<end, with: width)
         
-        return NSImage(data: data.dataUsingEncoding(NSUTF8StringEncoding)!)
+        return NSImage(data: data.data(using: String.Encoding.utf8)!)
     }
     
     func givePercentDone() -> CGFloat {
         
         
-        var done: NSTimeInterval = 0
+        var done: TimeInterval = 0
         let destinitionDate = DateManager.sharedManager.getDestinitionTime()
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = Calendar.current
         switch SettingsDelegate.sharedManager.percentType {
-        case .Life:
+        case .life:
             done = -(DateManager.sharedManager.youLifeCount ?? 0) / 2_209_032_000
-        case .Year:
-            var comp = calendar.components(.Year, fromDate: destinitionDate)
-            let firstDayOfYearDate = calendar.dateFromComponents(comp)
+        case .year:
+            var comp = (calendar as NSCalendar).components(.year, from: destinitionDate as Date)
+            let firstDayOfYearDate = calendar.date(from: comp)
             
-            comp = calendar.components(.Year, fromDate: destinitionDate)
+            comp = (calendar as NSCalendar).components(.year, from: destinitionDate as Date)
             comp.year += 1
-            let lastDayOfYearDate = calendar.dateFromComponents(comp)
+            let lastDayOfYearDate = calendar.date(from: comp)
             
-            let secondInDestenitionYear = lastDayOfYearDate?.timeIntervalSinceDate(firstDayOfYearDate!)
+            let secondInDestenitionYear = lastDayOfYearDate?.timeIntervalSince(firstDayOfYearDate!)
             
-            done = destinitionDate.timeIntervalSinceDate(firstDayOfYearDate!) / secondInDestenitionYear!
-        case .Month:
-            let dayInDestenitionMonth = calendar.rangeOfUnit(NSCalendarUnit.Day, inUnit: NSCalendarUnit.Month, forDate: destinitionDate)
+            done = destinitionDate.timeIntervalSince(firstDayOfYearDate!) / secondInDestenitionYear!
+        case .month:
+            let dayInDestenitionMonth = (calendar as NSCalendar).range(of: NSCalendar.Unit.day, in: NSCalendar.Unit.month, for: destinitionDate as Date)
             
-            let comp = calendar.components([.Year, .Month], fromDate: destinitionDate)
-            let firstDayOfMonthDate = calendar.dateFromComponents(comp)
+            let comp = (calendar as NSCalendar).components([.year, .month], from: destinitionDate as Date)
+            let firstDayOfMonthDate = calendar.date(from: comp)
             
-            done = destinitionDate.timeIntervalSinceDate(firstDayOfMonthDate!) / Double(dayInDestenitionMonth.length * 86_400)
-        case .Week:
-            var firstDayOfWeekDate: NSDate?
-            calendar.rangeOfUnit(.WeekOfYear, startDate: &firstDayOfWeekDate, interval: nil, forDate: destinitionDate)
+            done = destinitionDate.timeIntervalSince(firstDayOfMonthDate!) / Double(dayInDestenitionMonth.length * 86_400)
+        case .week:
+            var firstDayOfWeekDate: Date?
+            (calendar as NSCalendar).range(of: .weekOfYear, start: &firstDayOfWeekDate, interval: nil, for: destinitionDate)
             
-            let comp = calendar.components([.Year, .Month, .Day], fromDate: firstDayOfWeekDate!)
+            var comp = (calendar as NSCalendar).components([.year, .month, .day], from: firstDayOfWeekDate!)
             comp.day += 7
-            let lastDayOfWeekDate = calendar.dateFromComponents(comp)
+            let lastDayOfWeekDate = calendar.date(from: comp)
             
-            let secondInDestenitionWeek = lastDayOfWeekDate?.timeIntervalSinceDate(firstDayOfWeekDate!)
+            let secondInDestenitionWeek = lastDayOfWeekDate?.timeIntervalSince(firstDayOfWeekDate!)
             
-            done = destinitionDate.timeIntervalSinceDate(firstDayOfWeekDate!) / secondInDestenitionWeek!
-        case .Day:
-            let firstSecondOfDayDate = NSCalendar.currentCalendar().startOfDayForDate(destinitionDate)
+            done = destinitionDate.timeIntervalSince(firstDayOfWeekDate!) / secondInDestenitionWeek!
+        case .day:
+            let firstSecondOfDayDate = Calendar.current.startOfDay(for: destinitionDate as Date)
             
             let secondInDay: Double = 86_400 //one day
             
-            done = (destinitionDate.timeIntervalSinceDate(firstSecondOfDayDate) - Double(NSTimeZone.systemTimeZone().secondsFromGMT)) / secondInDay
+            done = (destinitionDate.timeIntervalSince(firstSecondOfDayDate) - Double(NSTimeZone.system.secondsFromGMT())) / secondInDay
             print(done)
         }
         return CGFloat(done)
@@ -337,15 +337,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
         let interval = -(DateManager.sharedManager.youLifeCount ?? 0)
         var div = 1
         switch SettingsDelegate.sharedManager.counterType {
-        case .Year:
+        case .year:
             div = 31_557_600
-        case .Week:
+        case .week:
             div = 604_800
-        case .Day:
+        case .day:
             div = 86_400
-        case .Hour:
+        case .hour:
             div = 3_600
-        case .Minute:
+        case .minute:
             div = 60
         default:
             div = 1
@@ -356,8 +356,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
             str = String(Int(interval)/div)
         } else {
             let d = interval / Double(div)
-            str = String(d - d % 0.00001)
-            for _ in 0..<(5 - str.componentsSeparatedByString(".")[1].characters.count) {
+            str = String(d - d.truncatingRemainder(dividingBy: 0.00001))
+            for _ in 0..<(5 - str.components(separatedBy: ".")[1].characters.count) {
                 str += "0"
             }
         }
@@ -366,11 +366,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, ChangeValues {
     }
     
     func relauchProgram() {
-        let task = NSTask()
+        let task = Process()
         task.launchPath = "/bin/sh"
-        task.arguments = ["-c", "open \"\(NSBundle.mainBundle().bundlePath)\""]
+        task.arguments = ["-c", "open \"\(Bundle.main.bundlePath)\""]
         task.launch()
-        NSApplication.sharedApplication().terminate(nil)
+        NSApplication.shared().terminate(nil)
     }
     
 }

@@ -11,84 +11,84 @@ import Foundation
 class SettingsDelegate {
     
     static let sharedManager = SettingsDelegate()
-    private init() {}
+    fileprivate init() {}
     
     var delegates = [ChangeValues]()
-    func removeDelegateWithIndex(index: Int) {
-        delegates.removeAtIndex(index)
+    func removeDelegateWithIndex(_ index: Int) {
+        delegates.remove(at: index)
     }
-    func setDelegate(delegate: ChangeValues) -> Int {
+    func setDelegate(_ delegate: ChangeValues) -> Int {
         delegates.append(delegate)
         return delegates.count - 1
     }
     
-    var youBirthDay: NSDate? {
+    var youBirthDay: Date? {
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "birthDay")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(newValue, forKey: "birthDay")
+            UserDefaults.standard.synchronize()
         }
         get {
-            return NSUserDefaults.standardUserDefaults().objectForKey("birthDay") as? NSDate
+            return UserDefaults.standard.object(forKey: "birthDay") as? Date
         }
     }
     var percentIsEnable: Bool {
         set {
-            let def = NSUserDefaults.standardUserDefaults()
-            def.setBool(newValue, forKey: "percentIsHidden")
+            let def = UserDefaults.standard
+            def.set(newValue, forKey: "percentIsHidden")
             def.synchronize()
             for n in delegates {
                 n.percentEnableChange(newValue)
             }
         }
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey("percentIsHidden")
+            return UserDefaults.standard.bool(forKey: "percentIsHidden")
         }
     }
     var counterIsEnable: Bool {
         set {
-            let def = NSUserDefaults.standardUserDefaults()
-            def.setBool(newValue, forKey: "counterIsHidden")
+            let def = UserDefaults.standard
+            def.set(newValue, forKey: "counterIsHidden")
             def.synchronize()
             for n in delegates {
                 n.counterEnableChange(newValue)
             }
         }
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey("counterIsHidden")
+            return UserDefaults.standard.bool(forKey: "counterIsHidden")
         }
     }
     var percentType: PercentType {
         set {
-            let def = NSUserDefaults.standardUserDefaults()
-            def.setInteger(newValue.rawValue, forKey: "percentType")
+            let def = UserDefaults.standard
+            def.set(newValue.rawValue, forKey: "percentType")
             def.synchronize()
             for n in delegates {
                 n.percentTypeChange(newValue)
             }
         }
         get {
-            return PercentType(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("percentType")) ?? .Life
+            return PercentType(rawValue: UserDefaults.standard.integer(forKey: "percentType")) ?? .life
         }
     }
-    func setPercentTypeWithTag(tag: Int) {
+    func setPercentTypeWithTag(_ tag: Int) {
         if let type = PercentType(rawValue: tag) {
             percentType = type
         }
     }
     var counterType: CounterType {
         set {
-            let def = NSUserDefaults.standardUserDefaults()
-            def.setInteger(newValue.rawValue, forKey: "counterType")
+            let def = UserDefaults.standard
+            def.set(newValue.rawValue, forKey: "counterType")
             def.synchronize()
             for n in delegates {
                 n.counterTypeChange(newValue)
             }
         }
         get {
-            return CounterType(rawValue: NSUserDefaults.standardUserDefaults().integerForKey("counterType"))!
+            return CounterType(rawValue: UserDefaults.standard.integer(forKey: "counterType"))!
         }
     }
-    func setCounterTypeWithTag(tag: Int) {
+    func setCounterTypeWithTag(_ tag: Int) {
         if let type = CounterType(rawValue: tag) {
             counterType = type
         }
@@ -96,18 +96,18 @@ class SettingsDelegate {
     }
     var counterIsInteger: Bool {
         set {
-            let def = NSUserDefaults.standardUserDefaults()
-            def.setBool(newValue, forKey: "counterIsInteger")
+            let def = UserDefaults.standard
+            def.set(newValue, forKey: "counterIsInteger")
             def.synchronize()
             for n in delegates {
                 n.counterIntegerChange(newValue)
             }
         }
         get {
-            if NSUserDefaults.standardUserDefaults().objectForKey("counterIsInteger") == nil {
+            if UserDefaults.standard.object(forKey: "counterIsInteger") == nil {
                 return true
             }
-            return NSUserDefaults.standardUserDefaults().boolForKey("counterIsInteger")
+            return UserDefaults.standard.bool(forKey: "counterIsInteger")
         }
     }
     
@@ -118,29 +118,29 @@ class SettingsDelegate {
 
 
 protocol ChangeValues {
-    func percentEnableChange(percentIsEnable: Bool)
-    func counterEnableChange(counterIsEnable: Bool)
-    func percentTypeChange(percentType: PercentType)
-    func counterTypeChange(counterType: CounterType)
-    func counterIntegerChange(counterIsInteger: Bool)
-    func birthDayChage(birthDay: NSDate)
+    func percentEnableChange(_ percentIsEnable: Bool)
+    func counterEnableChange(_ counterIsEnable: Bool)
+    func percentTypeChange(_ percentType: PercentType)
+    func counterTypeChange(_ counterType: CounterType)
+    func counterIntegerChange(_ counterIsInteger: Bool)
+    func birthDayChage(_ birthDay: Date)
 }
 
 enum PercentType: Int {
-    case Life
-    case Year
-    case Month
-    case Week
-    case Day
+    case life
+    case year
+    case month
+    case week
+    case day
 }
 
 enum CounterType: Int {
-    case Year
-    case Week
-    case Day
-    case Hour
-    case Minute
-    case Second
+    case year
+    case week
+    case day
+    case hour
+    case minute
+    case second
 }
 
 

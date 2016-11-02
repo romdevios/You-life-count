@@ -11,26 +11,26 @@ import Foundation
 class DateManager {
     
     static let sharedManager = DateManager()
-    private init() {}
+    fileprivate init() {}
     
-    var youLifeCount: NSTimeInterval? {
+    var youLifeCount: TimeInterval? {
         guard let birthDay = SettingsDelegate.sharedManager.youBirthDay else {
             return nil
         }
-        return birthDay.timeIntervalSinceDate(getDestinitionTime())
+        return birthDay.timeIntervalSince(getDestinitionTime())
     }
     
-    func getDestinitionTime() -> NSDate {
-        let sourceDate = NSDate()
+    func getDestinitionTime() -> Date {
+        let sourceDate = Date()
         
-        let sourceTimeZone = NSTimeZone(abbreviation: "GMT")
-        let destinationTimeZone = NSTimeZone.systemTimeZone
+        let sourceTimeZone = TimeZone(abbreviation: "GMT")
+        let destinationTimeZone = TimeZone.systemTimeZone
         
-        let sourceGMTOffset = sourceTimeZone!.secondsFromGMTForDate(sourceDate)
-        let destinationGMTOffset = destinationTimeZone().secondsFromGMTForDate(sourceDate)
+        let sourceGMTOffset = sourceTimeZone!.secondsFromGMT(for: sourceDate)
+        let destinationGMTOffset = destinationTimeZone().secondsFromGMT(for: sourceDate)
         let interval = Double(destinationGMTOffset - sourceGMTOffset)
         
-        return NSDate(timeInterval: interval, sinceDate:sourceDate)
+        return Date(timeInterval: interval, since:sourceDate)
     }
     
 }

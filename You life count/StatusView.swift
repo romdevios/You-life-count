@@ -10,9 +10,9 @@ import Cocoa
 
 class StatusView: NSView {
     
-    override func drawRect(dirtyRect: NSRect) {
-        let ovalPath = NSBezierPath(ovalInRect: dirtyRect)
-        NSColor.grayColor().setFill()
+    override func draw(_ dirtyRect: NSRect) {
+        let ovalPath = NSBezierPath(ovalIn: dirtyRect)
+        NSColor.gray.setFill()
         ovalPath.fill()
     }
     

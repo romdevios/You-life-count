@@ -49,7 +49,7 @@ class ViewController: NSViewController, ChangeValues {
         percentTypeChange(settings.percentType)
         counterTypeChange(settings.counterType)
         counterIntegerChange(settings.counterIsInteger)
-        birthDayChage(settings.youBirthDay ?? NSDate())
+        birthDayChage(settings.youBirthDay as Date? ?? Date())
         
         
     }
@@ -64,19 +64,19 @@ class ViewController: NSViewController, ChangeValues {
         }
     }
 
-    @IBAction func PercentsChange(sender: NSButton) {
+    @IBAction func PercentsChange(_ sender: NSButton) {
         SettingsDelegate.sharedManager.setPercentTypeWithTag(sender.tag)
     }
     
-    @IBAction func CounterChenged(sender: NSButton) {
+    @IBAction func CounterChenged(_ sender: NSButton) {
         SettingsDelegate.sharedManager.setCounterTypeWithTag(sender.tag)
     }
     
-    @IBAction func TypeOfCounterChanged(sender: NSSegmentedControl) {
+    @IBAction func TypeOfCounterChanged(_ sender: NSSegmentedControl) {
         SettingsDelegate.sharedManager.counterIsInteger = sender.selectedSegment == 0
     }
     
-    @IBAction func AddWidget(sender: NSButton) {
+    @IBAction func AddWidget(_ sender: NSButton) {
         if sender.tag == 0 {
             SettingsDelegate.sharedManager.percentIsEnable = sender.state == NSOnState
         } else if sender.tag == 1 {
@@ -84,34 +84,34 @@ class ViewController: NSViewController, ChangeValues {
         }
     }
     
-    @IBAction func NewBirthDay(sender: NSDatePicker) {
+    @IBAction func NewBirthDay(_ sender: NSDatePicker) {
         SettingsDelegate.sharedManager.youBirthDay = sender.dateValue
     }
     
     
     
-    func percentEnableChange(percentIsEnable: Bool) {
+    func percentEnableChange(_ percentIsEnable: Bool) {
         PercentEnable.state = percentIsEnable ? NSOnState : NSOffState
     }
-    func counterEnableChange(counterIsEnable: Bool) {
+    func counterEnableChange(_ counterIsEnable: Bool) {
         CounterEnable.state = counterIsEnable ? NSOnState : NSOffState
     }
-    func percentTypeChange(percentType: PercentType) {
+    func percentTypeChange(_ percentType: PercentType) {
         for button in percents {
             button.state = NSOffState
         }
         percents[percentType.rawValue].state = NSOnState
     }
-    func counterTypeChange(counterType: CounterType) {
+    func counterTypeChange(_ counterType: CounterType) {
         for button in counters {
             button.state = NSOffState
         }
         counters[counterType.rawValue].state = NSOnState
     }
-    func counterIntegerChange(counterIsInteger: Bool) {
+    func counterIntegerChange(_ counterIsInteger: Bool) {
         TypeOfCounter.selectedSegment = counterIsInteger ? 0 : 1
     }
-    func birthDayChage(birthDay: NSDate) {
+    func birthDayChage(_ birthDay: Date) {
         BirthDay.dateValue = birthDay
     }
     
